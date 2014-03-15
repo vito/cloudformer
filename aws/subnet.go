@@ -22,8 +22,12 @@ func (subnet Subnet) AvailabilityZone(name string) {
 }
 
 func (subnet Subnet) Instance(name string) cloudformer.Instance {
+	if subnet.model.AvailabilityZone == "" {
+		panic("must set availability zone on subnet before creating an instance")
+	}
+
 	model := &models.Instance{
-		AvailabilityZone: subnet.model.AvailabilityZone, // TODO: order matters here
+		AvailabilityZone: subnet.model.AvailabilityZone,
 		SubnetId:         models.Ref(subnet.name + "Subnet"),
 		SecurityGroupIds: []interface{}{},
 		Tags: []models.Tag{
