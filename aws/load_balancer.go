@@ -8,8 +8,9 @@ import (
 )
 
 type LoadBalancer struct {
-	name  string
-	model *models.LoadBalancer
+	name      string
+	model     *models.LoadBalancer
+	resources models.Resources
 }
 
 func (balancer LoadBalancer) Listener(
@@ -60,4 +61,31 @@ func (balancer LoadBalancer) SecurityGroup(group cloudformer.SecurityGroup) {
 	)
 
 	balancer.model.SecurityGroups = securityGroups
+}
+
+func (balancer LoadBalancer) RecordSet(name, zone string) {
+	balancer.resources[balancer.name+"RecordSet"] =
+		&models.RecordSetGroup{
+			HostedZoneName: zone + ".",
+			RecordSets: []models.RecordSet{
+				{
+					Name: name + "." + zone + ".",
+					Type: "A",
+					AliasTarget: models.RecordSetAliasTarget{
+						HostedZoneId: models.Hash{
+							"Fn::GetAtt": []string{
+								balancer.name + "LoadBalancer",
+								"CanonicalHostedZoneNameID",
+							},
+						},
+						DNSName: models.Hash{
+							"Fn::GetAtt": []string{
+								balancer.name + "LoadBalancer",
+								"CanonicalHostedZoneName",
+							},
+						},
+					},
+				},
+			},
+		}
 }

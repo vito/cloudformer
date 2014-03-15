@@ -66,6 +66,7 @@ type LoadBalancer interface {
 	HealthCheck(HealthCheck)
 	Subnet(Subnet)
 	SecurityGroup(SecurityGroup)
+	RecordSet(name, zone string)
 }
 
 type HealthCheck struct {

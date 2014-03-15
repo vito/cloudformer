@@ -72,7 +72,8 @@ func (cloudFormer *AWSCloudFormer) LoadBalancer(name string) cloudformer.LoadBal
 	cloudFormer.resources[name+"LoadBalancer"] = model
 
 	return LoadBalancer{
-		name:  name,
-		model: model,
+		name:      name,
+		model:     model,
+		resources: cloudFormer.resources,
 	}
 }
