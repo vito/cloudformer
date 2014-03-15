@@ -59,8 +59,10 @@ func (vpc VPC) Subnet(name string) cloudformer.Subnet {
 
 func (vpc VPC) SecurityGroup(name string) cloudformer.SecurityGroup {
 	model := &models.SecurityGroup{
-		GroupDescription: name,
-		VpcId:            models.Ref(vpc.name + "VPC"),
+		GroupDescription:     name,
+		VpcId:                models.Ref(vpc.name + "VPC"),
+		SecurityGroupIngress: []interface{}{},
+		SecurityGroupEgress:  []interface{}{},
 	}
 
 	vpc.resources[name+"SecurityGroup"] = model

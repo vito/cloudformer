@@ -1,6 +1,7 @@
 package aws
 
 import (
+	"fmt"
 	"net"
 
 	"github.com/vito/cloudformer"
@@ -18,13 +19,17 @@ func (securityGroup SecurityGroup) Ingress(
 	fromPort uint16,
 	toPort uint16,
 ) {
-	securityGroup.model.SecurityGroupIngress =
+	ingress := securityGroup.model.SecurityGroupIngress.([]interface{})
+
+	ingress = append(ingress,
 		&models.SecurityGroupIngress{
 			CidrIp:     network.String(),
 			IpProtocol: protocol,
-			FromPort:   fromPort,
-			ToPort:     toPort,
-		}
+			FromPort:   fmt.Sprintf("%d", fromPort),
+			ToPort:     fmt.Sprintf("%d", toPort),
+		})
+
+	securityGroup.model.SecurityGroupIngress = ingress
 }
 
 func (securityGroup SecurityGroup) Egress(
@@ -33,11 +38,15 @@ func (securityGroup SecurityGroup) Egress(
 	fromPort uint16,
 	toPort uint16,
 ) {
-	securityGroup.model.SecurityGroupIngress =
+	e := securityGroup.model.SecurityGroupEgress.([]interface{})
+
+	e = append(e,
 		&models.SecurityGroupEgress{
 			CidrIp:     network.String(),
 			IpProtocol: protocol,
-			FromPort:   fromPort,
-			ToPort:     toPort,
-		}
+			FromPort:   fmt.Sprintf("%d", fromPort),
+			ToPort:     fmt.Sprintf("%d", toPort),
+		})
+
+	securityGroup.model.SecurityGroupEgress = e
 }
