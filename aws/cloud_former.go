@@ -57,7 +57,7 @@ func (cloudFormer *AWSCloudFormer) ElasticIP(name string) cloudformer.ElasticIP 
 		resources: cloudFormer.resources,
 	}
 
-	cloudFormer.resources[name+"ElasticIP"] = ip.model
+	cloudFormer.resources[name+"EIP"] = ip.model
 
 	return ip
 }

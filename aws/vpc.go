@@ -20,7 +20,7 @@ func (vpc VPC) Network(network *net.IPNet) {
 }
 
 func (vpc VPC) AttachInternetGateway(gateway cloudformer.InternetGateway) {
-	vpc.resources[vpc.name+"GatewayAttachment"] =
+	vpc.resources[vpc.name+"VPCGatewayAttachment"] =
 		&models.VPCGatewayAttachment{
 			VpcId:             models.Ref(vpc.name + "VPC"),
 			InternetGatewayId: models.Ref(gateway.(InternetGateway).name + "InternetGateway"),
@@ -33,7 +33,7 @@ func (vpc VPC) AssociateDHCPOptions(options cloudformer.DHCPOptions) {
 			DomainNameServers: options.DomainNameServers,
 		}
 
-	vpc.resources[vpc.name+"DHCPOptionsAssociation"] =
+	vpc.resources[vpc.name+"VPCDHCPOptionsAssociation"] =
 		&models.VPCDHCPOptionsAssociation{
 			VpcId:         models.Ref(vpc.name + "VPC"),
 			DhcpOptionsId: models.Ref(vpc.name + "DHCPOptions"),

@@ -50,7 +50,7 @@ func (subnet Subnet) RouteTable() cloudformer.RouteTable {
 
 	subnet.resources[subnet.name+"RouteTable"] = model
 
-	subnet.resources[subnet.name+"RouteTableAssociation"] =
+	subnet.resources[subnet.name+"SubnetRouteTableAssociation"] =
 		&models.SubnetRouteTableAssociation{
 			SubnetId:     models.Ref(subnet.name + "Subnet"),
 			RouteTableId: models.Ref(subnet.name + "RouteTable"),
