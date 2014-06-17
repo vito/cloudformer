@@ -10,6 +10,7 @@ type CloudFormer interface {
 	VPC(name string) VPC
 	ElasticIP(name string) ElasticIP
 	LoadBalancer(name string) LoadBalancer
+	S3Bucket(name string) S3Bucket
 }
 
 type InternetGateway interface{}
@@ -82,3 +83,7 @@ type ProtocolType string
 
 const TCP = ProtocolType("tcp")
 const UDP = ProtocolType("udp")
+
+type S3Bucket interface {
+	Name(string)
+}
