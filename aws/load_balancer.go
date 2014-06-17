@@ -35,7 +35,7 @@ func (balancer LoadBalancer) Listener(
 
 func (balancer LoadBalancer) HealthCheck(check cloudformer.HealthCheck) {
 	balancer.model.HealthCheck = models.LoadBalancerHealthCheck{
-		Target:             fmt.Sprintf("%s:%d", check.Protocol, check.Port),
+		Target:             fmt.Sprintf("%s:%d%s", check.Protocol, check.Port, check.Path),
 		Interval:           fmt.Sprintf("%d", int(check.Interval.Seconds())),
 		Timeout:            fmt.Sprintf("%d", int(check.Timeout.Seconds())),
 		HealthyThreshold:   fmt.Sprintf("%d", check.HealthyThreshold),

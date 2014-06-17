@@ -73,6 +73,7 @@ type LoadBalancer interface {
 type HealthCheck struct {
 	Protocol           ProtocolType
 	Port               uint16
+	Path               string
 	Timeout            time.Duration
 	Interval           time.Duration
 	HealthyThreshold   int
