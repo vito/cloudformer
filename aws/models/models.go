@@ -171,6 +171,7 @@ type LoadBalancerListener struct {
 	LoadBalancerPort string `json:"LoadBalancerPort,omitempty"`
 	Protocol         string `json:"Protocol,omitempty"`
 	InstanceProtocol string `json:"InstanceProtocol,omitempty"`
+	SSLCertificateId string `json:"SSLCertificateId,omitempty"`
 }
 
 func (LoadBalancer) Type() string {

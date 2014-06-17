@@ -63,7 +63,7 @@ type ElasticIP interface {
 }
 
 type LoadBalancer interface {
-	Listener(ProtocolType, uint16, ProtocolType, uint16)
+	Listener(ProtocolType, uint16, ProtocolType, uint16, string)
 	HealthCheck(HealthCheck)
 	Subnet(Subnet)
 	SecurityGroup(SecurityGroup)

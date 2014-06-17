@@ -18,6 +18,7 @@ func (balancer LoadBalancer) Listener(
 	port uint16,
 	destinationProtocol cloudformer.ProtocolType,
 	destinationPort uint16,
+	sslCertificateId string,
 ) {
 	listeners := balancer.model.Listeners.([]interface{})
 
@@ -26,6 +27,7 @@ func (balancer LoadBalancer) Listener(
 		LoadBalancerPort: fmt.Sprintf("%d", port),
 		InstanceProtocol: string(destinationProtocol),
 		InstancePort:     fmt.Sprintf("%d", destinationPort),
+		SSLCertificateId: sslCertificateId,
 	})
 
 	balancer.model.Listeners = listeners
