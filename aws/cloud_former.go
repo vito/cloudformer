@@ -88,3 +88,14 @@ func (cloudFormer *AWSCloudFormer) LoadBalancer(name string) cloudformer.LoadBal
 		resources: cloudFormer.resources,
 	}
 }
+
+func (cloudFormer *AWSCloudFormer) RecordSet(name string) cloudformer.RecordSet {
+	recordSet := RecordSet{
+		name:  name,
+		model: &models.RecordSet{},
+	}
+
+	cloudFormer.resources[name+"RecordSet"] = recordSet.model
+
+	return recordSet
+}

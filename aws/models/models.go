@@ -333,9 +333,20 @@ func (RecordSetGroup) DependsOn() string {
 }
 
 type RecordSet struct {
-	Name        interface{} `json:"Name,omitempty"`
-	Type        interface{} `json:"Type,omitempty"`
-	AliasTarget interface{} `json:"AliasTarget,omitempty"`
+	Name            interface{} `json:"Name,omitempty"`
+	RecordSetType   interface{} `json:"Type,omitempty"`
+	AliasTarget     interface{} `json:"AliasTarget,omitempty"`
+	TTL             interface{} `json:"TTL,omitempty"`
+	ResourceRecords interface{} `json:"ResourceRecords,omitempty"`
+	HostedZoneName  interface{} `json:"HostedZoneName,omitempty"`
+}
+
+func (RecordSet) Type() string {
+	return "AWS::Route53::RecordSet"
+}
+
+func (RecordSet) DependsOn() string {
+	return ""
 }
 
 type RecordSetAliasTarget struct {

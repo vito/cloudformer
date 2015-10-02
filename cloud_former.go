@@ -11,6 +11,7 @@ type CloudFormer interface {
 	ElasticIP(name string) ElasticIP
 	LoadBalancer(name string) LoadBalancer
 	Bucket(name string) Bucket
+	RecordSet(name string) RecordSet
 }
 
 type InternetGateway interface{}
@@ -89,4 +90,11 @@ const UDP = ProtocolType("udp")
 
 type Bucket interface {
 	Name(string)
+}
+
+type RecordSet interface {
+	HostedZoneName(hostedZoneName string)
+	Name(name string)
+	PointTo(ElasticIP)
+	TTL(ttl int)
 }
