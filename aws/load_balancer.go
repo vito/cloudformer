@@ -80,7 +80,7 @@ func (balancer LoadBalancer) RecordSet(name, zone string) {
 			RecordSets: []models.RecordSet{
 				{
 					Name: name + "." + zone + ".",
-					Type: "A",
+					RecordSetType: "A",
 					AliasTarget: models.RecordSetAliasTarget{
 						HostedZoneId: models.Hash{
 							"Fn::GetAtt": []string{
