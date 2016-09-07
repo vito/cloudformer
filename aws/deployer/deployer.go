@@ -105,7 +105,7 @@ func (deployer *AWSDeployer) Watch(events chan<- *cloudformation.StackEvent, nam
 
 			events <- ev
 
-			if ev.ResourceType == "AWS::CloudFormation::Stack" {
+			if ev.ResourceType == "AWS::CloudFormation::Stack" && ev.LogicalResourceId == name {
 				completed = !strings.HasSuffix(ev.ResourceStatus, "_IN_PROGRESS")
 			}
 		}
